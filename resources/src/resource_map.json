@@ -1,0 +1,21 @@
+
+{"friendlyVersion": "1.0",
+ "versionDefName": "RESOURCES",
+ "media": [
+	{
+		"type":		"png",
+		"defName":	"IMAGE_MENU_ICON",
+		"file":		"images/menu_icon.png"
+	},
+	{
+		"type":		"font",
+		"defName":	"FONT_GILLSANS_40",
+		"file":		"fonts/GillSans.ttc"
+	},
+	{
+		"type":		"font",
+		"defName":	"FONT_GILLSANS_16",
+		"file":		"fonts/GillSans.ttc"
+	}
+]
+}
