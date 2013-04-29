@@ -24,10 +24,11 @@ static Layer hand_layer;
 static Layer bg_layer;
 static PblTm now;
 static GFont font_time;
-static GFont font_date;
+//static GFont font_date;
 
 static int use_24hour;
-
+#define USE_0_INSTEAD_OF_24 true
+#define WHITE_ON_BLACK true
 
 // Dimensions of the watch face
 #define PEBBLE_SCREEN_WIDTH 144
@@ -324,7 +325,7 @@ bg_layer_update(
     graphics_context_set_text_color(ctx, GColorWhite);
 	bool shift = use_24hour && (now.tm_hour >=12);
     graphics_text_draw(ctx,
-                       shift ? "0" : "12",
+                       shift ? (USE_0_INSTEAD_OF_24 ? "0" : "24") : "12",
                        font_time,
                        GRect(W/2-30,4,60,50),
                        GTextOverflowModeTrailingEllipsis,
@@ -407,18 +408,17 @@ bg_layer_update(
                        );
 	*/
 
-//#define WHITE_ON_BLACK
     
 	gpath_rotate_to(&mdbox_path, TRIG_MAX_ANGLE / 8);
     graphics_context_set_fill_color(ctx, GColorWhite);
-#ifdef WHITE_ON_BLACK
-    gpath_draw_outline(ctx, &mdbox_path);
-	graphics_context_set_stroke_color(ctx, GColorWhite);
-#else
-    gpath_draw_filled(ctx, &mdbox_path);
-	graphics_context_set_stroke_color(ctx, GColorBlack);
-#endif
-    
+	if (WHITE_ON_BLACK) {
+    	gpath_draw_outline(ctx, &mdbox_path);
+		graphics_context_set_stroke_color(ctx, GColorWhite);
+	} else {
+    	gpath_draw_filled(ctx, &mdbox_path);
+		graphics_context_set_stroke_color(ctx, GColorBlack);
+	}
+
     int ndigits = (mday<10)?0:1;
     int digit[2] = { mday%10, mday/10 };
     
@@ -479,7 +479,7 @@ handle_init(
     resource_init_current_app(&RESOURCES);
     
     font_time = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GILLSANS_40));
-    font_date = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GILLSANS_16));
+    //font_date = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GILLSANS_16));
     
 	// Rotate digits
 	int i, p;
@@ -518,7 +518,7 @@ handle_deinit(
     (void) ctx;
     
     fonts_unload_custom_font(font_time);
-    fonts_unload_custom_font(font_date);
+    //fonts_unload_custom_font(font_date);
 }
 
 

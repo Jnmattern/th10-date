@@ -10,12 +10,7 @@
 	{
 		"type":		"font",
 		"defName":	"FONT_GILLSANS_40",
-		"file":		"fonts/GillSans.ttc"
-	},
-	{
-		"type":		"font",
-		"defName":	"FONT_GILLSANS_16",
-		"file":		"fonts/GillSans.ttc"
+		"file":		"fonts/GillSans-subset.ttc"
 	}
 ]
 }
