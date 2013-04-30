@@ -473,7 +473,7 @@ handle_init(
     use_24hour = clock_is_24h_style();
     
     window_init(&window, "Main");
-    window_stack_push(&window, false);
+    window_stack_push(&window, true);
     window_set_background_color(&window, GColorBlack);
     
     resource_init_current_app(&RESOURCES);
